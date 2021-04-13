@@ -1,7 +1,7 @@
 const validateSession = require("../middleware/validate-session");
-const inventory = require("../models/inventory");
-const router = require("express").Router();
-const Inventory = require("../db").import("../models/inventory");
+const { Inventory } = require("../models/inventory");
+const { Router } = require("express");
+const router = Router();
 
 /********INVENTORY CREATED***********/
 

@@ -11,7 +11,21 @@ module.exports = (sequelize, DataTypes) => {
       item_total: DataTypes.INTEGER,
       order_total: DataTypes.INTEGER,
       status: DataTypes.STRING,
-      user_id: DataTypes.INTEGER
   });
+  Profile.associate = models => {
+    Profile.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    })
+  }
+  Order.associate = models => {
+    Order.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    })
+  }
+
   return Order;
 };

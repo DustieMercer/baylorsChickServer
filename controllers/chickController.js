@@ -1,6 +1,7 @@
 const validateSession = require("../middleware/validate-session");
-const router = require("express").Router();
-const Chick = require("../db").import("../models/chick");
+const { Chick } = require("../models");
+const { Router } = require("express");
+const router = Router();
 
 /********CHICK CREATED***********/
 

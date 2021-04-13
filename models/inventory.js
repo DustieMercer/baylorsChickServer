@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       unit_type: DataTypes.STRING,
       quantity_update: DataTypes.INTEGER,
       quantity_available: DataTypes.INTEGER,
-      unit_cost: DataTypes.INTEGER,
-      user_id: DataTypes.INTEGER,
+      unit_cost: DataTypes.INTEGER
   });
   return Inventory;
 };

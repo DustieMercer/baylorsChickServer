@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       chick_type: DataTypes.STRING,
       chick_production: DataTypes.STRING,
       chick_persona: DataTypes.STRING,
-      photo: DataTypes.STRING,
-      user_id: DataTypes.INTEGER
+      photo: DataTypes.STRING
   });
   return Chick;
 };

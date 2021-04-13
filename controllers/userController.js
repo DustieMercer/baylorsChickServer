@@ -1,7 +1,8 @@
-const router = require("express").Router();
-const User = require("../db").import("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { User } = require("../models");
+const { Router } = require("express");
+const router = Router();
 
 /********USER CREATED***********/
 
@@ -9,7 +10,7 @@ router.post("/create", (req, res) => {
   User.create({
     email: req.body.user.email,
     password: bcrypt.hashSync(req.body.user.password),
-    role: req.body.user.role
+    role: "default"
   })
     .then(function userSuccess(user) {
       let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {

@@ -1,7 +1,8 @@
 const { Op, DataTypes } = require("sequelize");
+const { Profile } = require(".");
 const sequelize = require("../db");
 
-module.exports = (sequelize, DataTypes) => {
+
   const User = sequelize.define("user", {
     email: {
       type: DataTypes.STRING,
@@ -14,5 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     role: DataTypes.STRING,
   });
-  return User;
-};
+
+  User.associate = models => {
+    User.hasOne(models.Profile, {
+      onDelete: "cascade"
+    });
+    User.hasMany(models.Order, {
+      onDelete: "cascade"
+    });
+  }
+
+module.exports = User;
