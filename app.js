@@ -10,17 +10,17 @@ const middleware = require("./middleware")
 // let inventory = require('./controllers/inventoryController')
 // let order = require('./controllers/orderController')
 // let profile = require('./controllers/profileController')
-let user = require('./controllers/userController');
+// let user = require('./controllers/userController');
 
 sequelize.sync();
 
 app.use(express.json());
 
-app.use('/chick', controllers.chick)
-app.use('/inventory', controllers.inventory)
-app.use('/order', controllers.order)
-app.use('/profile', controllers.profile)
-app.use('/user', controllers.user)
+app.use('/chick', controllers.Chick)
+app.use('/inventory', controllers.Inventory)
+app.use('/order', controllers.Order)
+app.use('/profile', controllers.Profile)
+app.use('/user', controllers.User)
 
 app.listen(Port, function() {
     console.log(`App is listening on port ${Port}`);

@@ -16,13 +16,5 @@ const sequelize = require("../db");
     role: DataTypes.STRING,
   });
 
-  User.associate = models => {
-    User.hasOne(models.Profile, {
-      onDelete: "cascade"
-    });
-    User.hasMany(models.Order, {
-      onDelete: "cascade"
-    });
-  }
 
 module.exports = User;

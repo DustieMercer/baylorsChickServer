@@ -14,13 +14,6 @@ const sequelize = require("../db");
     phone_number: DataTypes.STRING,
   });
 
-  Profile.associate = models => {
-    Profile.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
-    })
-  }
   
 
   module.exports = Profile;
