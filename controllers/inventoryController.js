@@ -13,7 +13,7 @@ router.post("/add", validateSession, (req, res) => {
     quantity_update: req.body.inventory.quantity_update,
     quantity_available: req.body.inventory.quantity_available ,
     unit_cost: req.body.inventory.unit_cost,
-    user_id: req.user.id,
+    userId: req.user.id,
   })
     .then(function inventoryAddSuccess(inventory) {
       res.json({

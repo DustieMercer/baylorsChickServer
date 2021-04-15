@@ -17,7 +17,7 @@ router.post("/new", validateSession, (req, res) => {
     state: req.body.profile.state,
     zipcode: req.body.profile.zipcode,
     phone_number: req.body.profile.phone_number,
-    user_id: req.user.id,
+    userId: req.user.id,
   })
     .then(function profileSuccess(profile) {
       res.json({
