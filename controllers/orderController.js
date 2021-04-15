@@ -1,7 +1,7 @@
 const validateSession = require("../middleware/validate-session");
-const order = require("../models/order");
-const router = require("express").Router();
-const Order = require("../db").import("../models/order");
+const { Order } = require("../models");
+const { Router } = require("express");
+const router = Router();
 
 /********ORDER CREATED***********/
 
@@ -15,7 +15,7 @@ router.post("/create", validateSession, (req, res) => {
     item_total: req.body.order.item_total ,
     order_total: req.body.order.order_total ,
     status: req.body.order.status,
-    user_id: req.user.id
+    userId: req.user.id,
   })
     .then(function orderSuccess(order) {
       res.json({

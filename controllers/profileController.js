@@ -1,7 +1,8 @@
 const validateSession = require("../middleware/validate-session");
-const profile = require("../models/profile");
-const router = require("express").Router();
-const Profile = require("../db").import("../models/profile");
+const { Profile } = require("../models")
+const { Router } = require("express");
+const router = Router();
+
 
 /********PROFILE CREATED***********/
 
@@ -16,7 +17,7 @@ router.post("/new", validateSession, (req, res) => {
     state: req.body.profile.state,
     zipcode: req.body.profile.zipcode,
     phone_number: req.body.profile.phone_number,
-    user_id: req.user.id
+    userId: req.user.id,
   })
     .then(function profileSuccess(profile) {
       res.json({
@@ -27,15 +28,17 @@ router.post("/new", validateSession, (req, res) => {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
-router.get("/:id", validateSession, (req, res) => {
-  let id = req.params.id;
-  let userId = req.user.id;
-  Profile.findAll({
-      where: { user_id: userId, id: id }
-  })
-    .then((profile) => res.status(200).json(profile))
-    .catch((err) => res.status(500).json({ error: err }));
-});
+/*****GET PROFILE******/
+
+// router.get("/:id", validateSession, (req, res) => {
+//   let id = req.params.id;
+//   let userId = req.user.id;
+//   Profile.findOne({
+//       where: { user_id: userId, id: id },
+//   })
+//     .then((profile) => res.status(200).json(profile))
+//     .catch((err) => res.status(500).json({ error: err }));
+// });
 
 /*****UPDATE PROFILE******/
 
@@ -62,6 +65,20 @@ router.put("/:id", validateSession, function(req, res){
  Profile.update(updateProfile, query)
   .then(profile => res.status(200).json(profile))
   .catch(err => res.status(500).json({error:err}))
+});
+
+/*****GET PROFILE ASSOCIATION******/
+
+router.get("/:id", validateSession, (req, res) => {
+  const query = { 
+    where: { 
+      id: req.params.id,
+    },
+    include: 'user'
+  };
+  Profile.findOne(query)
+    .then((profileUser) => res.status(200).json(profileUser))
+    .catch((err) => res.status(500).json({ error: err }));
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const validateSession = require("../middleware/validate-session");
-const inventory = require("../models/inventory");
-const router = require("express").Router();
-const Inventory = require("../db").import("../models/inventory");
+const { Inventory } = require("../models/inventory");
+const { Router } = require("express");
+const router = Router();
 
 /********INVENTORY CREATED***********/
 
@@ -13,7 +13,7 @@ router.post("/add", validateSession, (req, res) => {
     quantity_update: req.body.inventory.quantity_update,
     quantity_available: req.body.inventory.quantity_available ,
     unit_cost: req.body.inventory.unit_cost,
-    user_id: req.user.id
+    userId: req.user.id,
   })
     .then(function inventoryAddSuccess(inventory) {
       res.json({

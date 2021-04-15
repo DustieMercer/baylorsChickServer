@@ -1,6 +1,7 @@
 const validateSession = require("../middleware/validate-session");
-const router = require("express").Router();
-const Chick = require("../db").import("../models/chick");
+const { Chick } = require("../models");
+const { Router } = require("express");
+const router = Router();
 
 /********CHICK CREATED***********/
 
@@ -10,7 +11,7 @@ router.post("/hatched", validateSession,(req, res) => {
     chick_type: req.body.chick.chick_type,
     chick_production: req.body.chick.chick_production,
     chick_persona: req.body.chick.chick_persona,
-    user_id: req.user.id
+    userId: req.user.id,
   })
     .then(function chickAddSuccess(chick) {
       res.json({

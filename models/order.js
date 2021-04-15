@@ -1,7 +1,7 @@
 const { Op, DataTypes } = require("sequelize");
 const sequelize = require("../db");
 
-module.exports = (sequelize, DataTypes) => {
+
   const Order = sequelize.define("order", {
       item_number: DataTypes.INTEGER,
       item_description: DataTypes.STRING,
@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       item_total: DataTypes.INTEGER,
       order_total: DataTypes.INTEGER,
       status: DataTypes.STRING,
-      user_id: DataTypes.INTEGER
   });
-  return Order;
-};
+
+module.exports = Order;
