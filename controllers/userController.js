@@ -33,6 +33,7 @@ router.post("/login", (req, res) => {
     where: {
       email: req.body.user.email,
     },
+    include: 'profile',
   })
     .then(function userFound(user) {
       if (user) {
@@ -48,7 +49,9 @@ router.post("/login", (req, res) => {
                 user: user,
                 message: "User login success!",
                 sessionToken: token,
-              });
+              },
+         
+              );
             } else {
               res.status(502).send({ error: "Login Failed" });
             }

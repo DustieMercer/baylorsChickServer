@@ -1,11 +1,12 @@
 const validateSession = require("../middleware/validate-session");
-const { Inventory } = require("../models/inventory");
+const { Inventory } = require("../models");
 const { Router } = require("express");
+const validateAdmin = require("../middleware/validateAdmin");
 const router = Router();
 
 /********INVENTORY CREATED***********/
 
-router.post("/add", validateSession, (req, res) => {
+router.post("/add", validateSession,validateAdmin, (req, res) => {
   Inventory.create({
     item_number: req.body.inventory.item_number ,
     item_description: req.body.inventory.item_description ,
@@ -26,7 +27,7 @@ router.post("/add", validateSession, (req, res) => {
 
 /********VIEW SINGLE ITEM***********/
 
-router.get("/:id", validateSession, (req, res) => {
+router.get("/:id", validateSession, validateAdmin, (req, res) => {
   let id = req.params.id;
   Inventory.findAll({
       where: {id: id}
@@ -37,7 +38,7 @@ router.get("/:id", validateSession, (req, res) => {
 
 /********VIEW ALL INVENTORY***********/
 
-router.get("/", validateSession, (req, res) => {
+router.get("/", validateSession, validateAdmin, (req, res) => {
   Inventory.findAll()
     .then((inventory) => res.status(200).json(inventory))
     .catch((err) => res.status(500).json({ error: err }));
@@ -45,7 +46,7 @@ router.get("/", validateSession, (req, res) => {
 
 /*****UPDATE ITEM******/
 
-router.put("/:id", validateSession, function(req, res){
+router.put("/:id", validateSession,validateAdmin, (req, res) => {
   const updateItem = {
     item_number: req.body.inventory.item_number ,
     item_description: req.body.inventory.item_description ,
@@ -55,7 +56,7 @@ router.put("/:id", validateSession, function(req, res){
     unit_cost: req.body.inventory.unit_cost,
   };
 
-  const query = { where: { id: req.params.id, user_id: req.user.id} };
+  const query = { where: { id: req.params.id, userId: req.user.id} };
 
  Inventory.update(updateItem, query)
   .then(inventory => res.status(200).json(inventory))
@@ -64,11 +65,11 @@ router.put("/:id", validateSession, function(req, res){
 
 /*****DELETE ITEM******/
 
-router.delete("/:id", validateSession, function (req, res){
+router.delete("/:id", validateSession, validateAdmin, (req, res) => {
   const query = {
     where: { 
       id: req.params.id,
-      user_id: req.user.id
+      userId: req.user.id
     }
   };
 

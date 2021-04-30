@@ -1,11 +1,12 @@
 const validateSession = require("../middleware/validate-session");
+const validateAdmin = require('../middleware/validateAdmin');
 const { Chick } = require("../models");
 const { Router } = require("express");
 const router = Router();
 
 /********CHICK CREATED***********/
 
-router.post("/hatched", validateSession,(req, res) => {
+router.post("/hatched", validateSession,validateAdmin,(req, res) => {
   Chick.create({
     chick_name: req.body.chick.chick_name,
     chick_type: req.body.chick.chick_type,
@@ -24,7 +25,7 @@ router.post("/hatched", validateSession,(req, res) => {
 
 /********VIEW SINGLE CHICK***********/
 
-router.get("/:id", validateSession, (req, res) => {
+router.get("/:id", validateSession, validateAdmin, (req, res) => {
   let id = req.params.id;
   Chick.findAll({
       where: {id: id}
@@ -35,7 +36,7 @@ router.get("/:id", validateSession, (req, res) => {
 
 /********VIEW ALL CHICKS***********/
 
-router.get("/", validateSession, (req, res) => {
+router.get("/", validateSession,validateAdmin, (req, res) => {
   Chick.findAll()
     .then((chick) => res.status(200).json(chick))
     .catch((err) => res.status(500).json({ error: err }));
@@ -43,7 +44,7 @@ router.get("/", validateSession, (req, res) => {
 
 /*****UPDATE CHICK******/
 
-router.put("/:id", validateSession, function(req, res){
+router.put("/:id", validateSession, validateAdmin, (req, res) => {
   const updateChick = {
     chick_name: req.body.chick.chick_name,
     chick_type: req.body.chick.chick_type,

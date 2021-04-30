@@ -1,5 +1,4 @@
 const { Op, DataTypes } = require("sequelize");
-const { Profile } = require(".");
 const sequelize = require("../db");
 
 

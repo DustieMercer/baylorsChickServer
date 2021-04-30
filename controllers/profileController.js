@@ -34,7 +34,7 @@ router.post("/new", validateSession, (req, res) => {
 //   let id = req.params.id;
 //   let userId = req.user.id;
 //   Profile.findOne({
-//       where: { user_id: userId, id: id },
+//       where: { userId: userId, id: id },
 //   })
 //     .then((profile) => res.status(200).json(profile))
 //     .catch((err) => res.status(500).json({ error: err }));
@@ -42,7 +42,7 @@ router.post("/new", validateSession, (req, res) => {
 
 /*****UPDATE PROFILE******/
 
-router.put("/:id", validateSession, function(req, res){
+router.put("/:id", validateSession, (req, res) => {
   const updateProfile = {
     first_name: req.body.profile.first_name,
     last_name: req.body.profile.last_name,
@@ -58,7 +58,7 @@ router.put("/:id", validateSession, function(req, res){
   const query = { 
     where: { 
       id: req.params.id, 
-      user_id: req.user.id
+      userId: req.user.id
     }
   };
 
@@ -69,10 +69,10 @@ router.put("/:id", validateSession, function(req, res){
 
 /*****GET PROFILE ASSOCIATION******/
 
-router.get("/:id", validateSession, (req, res) => {
+router.get("/", validateSession, (req, res) => {
   const query = { 
     where: { 
-      id: req.params.id,
+      userId: req.user.id,
     },
     include: 'user'
   };

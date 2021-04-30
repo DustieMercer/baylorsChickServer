@@ -32,7 +32,7 @@ router.get("/:id", validateSession, (req, res) => {
   let id = req.params.id;
   let userId = req.user.id;
   Order.findAll({
-      where: { user_id: userId, id: id }
+      where: { userId: userId, id: id }
   })
     .then((order) => res.status(200).json(order))
     .catch((err) => res.status(500).json({ error: err }));
@@ -51,7 +51,7 @@ router.get("/", validateSession, (req, res) => {
 
 /*****UPDATE ORDER******/
 
-router.put("/:id", validateSession, function(req, res){
+router.put("/:id", validateSession, (req, res) => {
   const updateEntry = {
     item_number: req.body.order.item_number ,
     item_description: req.body.order.item_description ,
@@ -63,7 +63,7 @@ router.put("/:id", validateSession, function(req, res){
     status: req.body.order.status,
   };
 
-  const query = { where: { id: req.params.id, user_id: req.user.id} };
+  const query = { where: { id: req.params.id, userId: req.user.id} };
 
  Order.update(updateEntry, query)
   .then(order => res.status(200).json(order))
@@ -72,11 +72,11 @@ router.put("/:id", validateSession, function(req, res){
 
 /*****DELETE ORDER******/
 
-router.delete("/:id", validateSession, function (req, res){
+router.delete("/:id", validateSession, (req, res) => {
   const query = { 
     where: {
       id: req.params.id, 
-      user_id: req.user.id
+      userId: req.user.id
     }
   };
 
