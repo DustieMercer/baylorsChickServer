@@ -36,7 +36,7 @@ router.get("/:id", validateSession, validateAdmin, (req, res) => {
 
 /********VIEW ALL CHICKS***********/
 
-router.get("/", validateSession,validateAdmin, (req, res) => {
+router.get("/", (req, res) => {
   Chick.findAll()
     .then((chick) => res.status(200).json(chick))
     .catch((err) => res.status(500).json({ error: err }));

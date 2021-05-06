@@ -42,7 +42,8 @@ router.post("/new", validateSession, (req, res) => {
 
 /*****UPDATE PROFILE******/
 
-router.put("/:id", validateSession, (req, res) => {
+router.put("/", validateSession, (req, res) => {
+  
   const updateProfile = {
     first_name: req.body.profile.first_name,
     last_name: req.body.profile.last_name,
@@ -57,7 +58,6 @@ router.put("/:id", validateSession, (req, res) => {
 
   const query = { 
     where: { 
-      id: req.params.id, 
       userId: req.user.id
     }
   };
