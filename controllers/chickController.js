@@ -27,7 +27,7 @@ router.post("/hatched", validateSession,validateAdmin,(req, res) => {
 
 router.get("/:id", validateSession, validateAdmin, (req, res) => {
   let id = req.params.id;
-  Chick.findAll({
+  Chick.findOne({
       where: {id: id}
   })
     .then((chick) => res.status(200).json(chick))
