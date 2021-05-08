@@ -7,12 +7,10 @@ const router = Router();
 
 router.post("/create", validateSession, (req, res) => {
   Order.create({
-    item_number: req.body.order.item_number ,
     item_description: req.body.order.item_description ,
     unit_type: req.body.order.unit_type ,
     quantity_ordered: req.body.order.quantity_ordered ,
     unit_cost: req.body.order.unit_cost ,
-    item_total: req.body.order.item_total ,
     order_total: req.body.order.order_total ,
     status: req.body.order.status,
     userId: req.user.id,
@@ -53,12 +51,10 @@ router.get("/", validateSession, (req, res) => {
 
 router.put("/:id", validateSession, (req, res) => {
   const updateEntry = {
-    item_number: req.body.order.item_number ,
     item_description: req.body.order.item_description ,
     unit_type: req.body.order.unit_type ,
     quantity_ordered: req.body.order.quantity_ordered ,
     unit_cost: req.body.order.unit_cost ,
-    item_total: req.body.order.item_total ,
     order_total: req.body.order.order_total ,
     status: req.body.order.status,
   };
@@ -81,7 +77,7 @@ router.delete("/:id", validateSession, (req, res) => {
   };
 
   Order.destroy(query)
-  .then(() => res.status(200).json({message: "Order Deleted!"}))
+  .then(() => res.status(200).json({message: "Your Order Has Been Cancelled."}))
   .catch(err => res.status(500).json({error:err}))
 });
 

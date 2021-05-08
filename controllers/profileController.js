@@ -81,4 +81,17 @@ router.get("/", validateSession, (req, res) => {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
+
+router.delete("/:id", validateSession, function (req, res){
+  const query = {
+    where: { 
+      id: req.params.id,
+    }
+  };
+
+  Profile.destroy(query)
+  .then(() => res.status(200).json({message: "Profile Deleted!"}))
+  .catch(err => res.status(500).json({error:err}))
+});
+
 module.exports = router;

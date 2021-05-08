@@ -14,6 +14,7 @@ const sequelize = require("../db");
     },
     role: DataTypes.STRING,
   });
+  
 
 
 module.exports = User;
