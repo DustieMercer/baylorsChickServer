@@ -9,6 +9,8 @@ const sequelize = require("../db");
       unit_cost: DataTypes.INTEGER,
       order_total: DataTypes.INTEGER,
       status: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+      updatedAt:Date
   });
 
 module.exports = Order;
