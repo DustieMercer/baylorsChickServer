@@ -12,6 +12,7 @@ router.post("/hatched", validateSession,validateAdmin,(req, res) => {
     chick_type: req.body.chick.chick_type,
     chick_production: req.body.chick.chick_production,
     chick_persona: req.body.chick.chick_persona,
+    photo:req.body.chick.photo,
     userId: req.user.id,
   })
     .then(function chickAddSuccess(chick) {
